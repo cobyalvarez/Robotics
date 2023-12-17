@@ -1,0 +1,1 @@
+During Lab 06 The biggest problems I had was with the IMU as I was not able to figure out how to collect the raw values and also utilize them to change them to degrees. Furthermore, I had issues with wiring for the button but tried my best on the lab. 

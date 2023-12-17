@@ -1,0 +1,6 @@
+ 1.What is the maximum and minimum distances that these sensors can read?
+The maximum distance is 1201 cm or 474 inches and the minimum is 0.
+2. What kinds and sizes of objects give better more accurate measurements.
+The flatter objects such as your hand or a wall give better measurements to me as they cover a wider range.
+3. What type of surface or size of objects are harder to get accurate reading from?For instance, compare readings from pointing the sensor strait at computer monitor verses someone wearing a soft fluffy loose fitting hoodie. We are measuring using reflected sound that hast come back in the direction of the sensor.
+Smaller objects or rounder objects are more difficult to read as the sound waves can receive multiple values at the same time.
