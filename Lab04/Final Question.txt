@@ -1,0 +1,7 @@
+Did it before the updated version of the lab. 
+
+
+Can you measure the span of time between bounces of the switch contacts when you press it.
+	For this code you cannot however if you were to add code to where it would track the time between each press it would most likely allow you to track it. Then you would need for it to start at each time.
+      Other than long, short, single and double presses, what other button input controls do you find in your daily tech and can you match that functionality in your button reader? Can you come up with your own button patterns? (secret button code to unlock something?)
+	I think you could add the option where if you click it 5 times it would turn the light on or print a secret message. Other options would be to use the scroll button to turn and do a action as well.
