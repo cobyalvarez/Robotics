@@ -1,0 +1,128 @@
+Lab 06
+
+
+
+
+Deep Bhakta
+--------------------------------------------------------------
+
+SELECT ArtistName
+FROM Artists A
+WHERE NOT EXISTS (SELECT Title
+				  FROM Titles T
+				  WHERE A.ArtistID = T.ArtistID)
+
+
+
+SELECT StudioName AS 'Studio Name', WebAddress AS 'Web Address'
+FROM Studios
+UNION
+SELECT ArtistName, WebAddress
+FROM Artists
+WHERE WebAddress IS NOT NULL
+
+
+
+SELECT Gender, COUNT(*)
+FROM Members
+GROUP BY Gender
+UNION
+SELECT 'Total', COUNT(Gender)
+FROM Members
+ORDER BY Gender
+
+
+
+SELECT Year(EntryDate) AS "Entry Year", count(Year(EntryDate)) AS "# Of Artists"
+FROM Artists GROUP BY Year(EntryDate)
+UNION
+SELECT "Number of Artists", count(EntryDate)
+FROM Artists
+
+
+
+SELECT count(*) AS "Number of Sound Files"
+FROM (Select MP3
+	  FROM Tracks
+WHERE MP3 = 1
+UNION ALL
+SELECT RealAud
+FROM Tracks
+WHERE RealAud = 1) A;
+
+
+
+SELECT TitleID, TrackTitle, LengthSeconds, 
+		(SELECT avg(lengthseconds)
+		 FROM Tracks WHERE TitleID = 1) AS "Average Seconds", 
+		(LengthSeconds - (SELECT avg(LengthSeconds)
+				     FROM Tracks WHERE TitleID = 1)) AS "Difference Seconds"
+FROM Tracks
+WHERE TitleID = 1
+
+
+
+SELECT TitleID, TrackNum, TrackTitle, LengthSeconds AS Sec,
+		(SELECT avg(LengthSeconds)
+		FROM Tracks SC WHERE SC.titleID = T.titleID) AS AvgSec,
+		(LengthSeconds - (SELECT avg(LengthSeconds) 
+						FROM Tracks SC WHERE SC.titleID = T.titleID)) AS Difference
+FROM Tracks T
+ORDER BY TitleID, TrackNum
+
+
+
+SELECT T.TitleID, T.TrackNum, T.TrackTitle, T.LengthSeconds, AvgSec, T.LengthSeconds - AvgSec
+FROM Tracks T INNER JOIN ((SELECT SC.TitleID, avg(LengthSeconds) AS AvgSec
+		FROM Tracks SC Group BY SC.TitleID)) sc 
+ON sc.titleID = T.titleID
+ORDER BY T.TitleID, T.TrackNum
+
+
+
+SELECT Title, count(tracknum) AS NumTracks, sum(lengthseconds)/60 AS LengthMins
+FROM Titles T INNER JOIN Tracks Tr
+ON T.Titleid = Tr.Titleid
+GROUP BY Title
+
+
+
+SELECT Ac2.AreaCode, count(Ac2.AreaCode)
+FROM (select Ac.Areacode
+	  from (select substring(homephone,1,3) as Areacode
+			from Members
+			UNION ALL
+			select substring(phone,1,3)
+			from Studios) Ac) Ac2
+Group By Ac2.AreaCode
+
+
+
+
+Select ArtistName, concat_ws(' ', M.FirstName, M.LastName) as Members
+From (XrefArtistsMembers X Left Join Artists A
+    On A.ArtistID = X.ArtistID) Left Join Members M
+    On X.MemberID = M.MemberID
+UNION
+Select ArtistName, count(X.MemberID) as "Members"
+From XrefArtistsMembers X Inner Join Artists Ar
+    On X.ArtistID = Ar.ArtistID
+Group by X.ArtistID, ArtistName
+Order by ArtistName Asc, Members Desc;
+
+
+
+SELECT Genre
+FROM Genre G
+WHERE NOT EXISTS (SELECT Title 
+			  FROM Titles T
+              WHERE G.Genre = T.Genre)
+
+
+
+
+
+
+
+
+
